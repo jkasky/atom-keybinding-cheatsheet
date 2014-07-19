@@ -82,10 +82,8 @@ class KeybindingView extends View
     @div class: 'keybinding', =>
       @div class: 'keybinding-keystrokes', outlet: 'keystrokes'
       @div class: 'keybinding-command', outlet: 'command'
-      # @div class: 'keybinding-selector', outlet: 'selector'
 
   initialize: (@binding) ->
     @keystrokes.text(@binding.keystrokes)
     [pkg, command] = binding.command.split ':'
     @command.text(command)
-    # @selector.text(@binding.selector)
