@@ -1,15 +1,16 @@
 {ScrollView, View} = require 'atom'
 
 module.exports =
-class KeybindingCheatsheetView extends ScrollView
+class KeybindingCheatsheetView extends View
   @content: ->
     @div class: 'keybinding-cheatsheet tool-panel', 'data-show-on-right-side': atom.config.get('keybinding-cheatsheet.showOnRightSide'), =>
-      @h2 'Keybinding Cheatsheet'
-      @input type: 'text', class: 'keybinding-filter', outlet: 'filterField'
-      @div class: 'keybinding-list', outlet: 'keybindings'
+      @div class: 'keybinding-panel-header', =>
+        @h2 'Keybinding Cheatsheet'
+        @input type: 'text', class: 'keybinding-filter', outlet: 'filterField'
+      @div class: 'keybinding-panel-content', =>
+        @subview 'listView', new KeybindingListView()
 
   initialize: (serializeState) ->
-    super
     atom.workspaceView.command 'keybinding-cheatsheet:toggle', => @toggle()
     atom.workspaceView.command 'keybinding-cheatsheet:refresh', => @refresh()
 
@@ -31,15 +32,15 @@ class KeybindingCheatsheetView extends ScrollView
     @update()
 
   update: ->
-    @keybindings.empty()
+    @listView.empty()
     for b in atom.keymaps.keyBindings
       continue unless @shouldShowBinding(b)
       [pkg, command] = b.command.split ':'
-      if @find("[data-keybinding-group=#{pkg}]").length
-        group = @find("[data-keybinding-group=#{pkg}]")
-      else
-        group = @append(new KeybindingGroupView(pkg))
-      group.append(new KeybindingView(b))
+      group = @listView.find("[data-keybinding-group=#{pkg}]")?.view()
+      if !group
+        group = new KeybindingGroupView(pkg)
+        @listView.append(group)
+      group.items.append(new KeybindingView(b))
 
   shouldShowBinding: (binding) ->
     return false if binding.command == 'native!'
@@ -66,11 +67,19 @@ class KeybindingCheatsheetView extends ScrollView
       atom.workspaceView.appendToLeft(this)
 
 
+class KeybindingListView extends ScrollView
+  @content: ->
+    @div class: 'keybinding-list'
+
+  initialize: (serializeState) ->
+    super
+
+
 class KeybindingGroupView extends View
   @content: ->
     @div class: 'keybinding-group', =>
       @h3 class: 'keybinding-group-header', outlet: 'header'
-      @div class: 'keybinding-list', outlet: 'keybindings'
+      @div class: 'keybinding-group-items', outlet: 'items'
 
   initialize: (name) ->
     @attr('data-keybinding-group', name)

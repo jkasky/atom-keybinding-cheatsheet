@@ -5,27 +5,56 @@
 @import "ui-variables";
 
 .keybinding-cheatsheet {
-  overflow: auto;
+  height: 100%;
+  min-width: 315px;
+  overflow: none;
   padding: 10px;
-  -webkit-animation: slide 0.5s forwards;
-  -webkit-transition: all 0.2s ease-in;
-  h2 {
-    margin-top: 0px;
-  }
-  .keybinding-filter {
-    margin-bottom: 10px;
-    width: 100%;
-  }
-  .keybinding {
-    padding-bottom: 3px;
-    .keybinding-keystrokes {
-      display: inline;
-      width: 40%;
+  padding-right: 15px;
+
+  .keybinding-panel-header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    height: 65px;
+
+    h2 {
+      margin-top: 0px;
     }
-    .keybinding-command {
-      display: inline;
-      float: right;
-      padding-left: 20px;
+
+    .keybinding-filter {
+      margin-bottom: 10px;
+      width: 100%;
+    }
+  }
+
+  .keybinding-panel-content {
+    position: absolute;
+    top: 65px;
+    left: 10px;
+    right: 10px;
+    bottom: 5px;
+
+    .keybinding-list {
+      height: 100%;
+      overflow: auto;
+
+      .keybinding-group {
+
+        .keybinding {
+          padding-bottom: 3px;
+          .keybinding-keystrokes {
+            display: inline;
+            width: 40%;
+          }
+
+          .keybinding-command {
+            display: inline;
+            float: right;
+            padding-left: 20px;
+          }
+        }
+      }
     }
   }
 }
