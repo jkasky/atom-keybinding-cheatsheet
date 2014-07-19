@@ -1,0 +1,17 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable keybinding-cheatsheet': 'keybinding-cheatsheet:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Keybinding Cheatsheet'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'keybinding-cheatsheet:toggle' }
+        { 'label': 'Refresh', 'command': 'keybinding-cheatsheet:refresh' }
+      ]
+    ]
+  }
+]

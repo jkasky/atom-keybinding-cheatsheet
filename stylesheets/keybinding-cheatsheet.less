@@ -1,0 +1,31 @@
+// The ui-variables file is provided by base themes provided by Atom.
+//
+// See https://github.com/atom/atom-dark-ui/blob/master/stylesheets/ui-variables.less
+// for a full listing of what's available.
+@import "ui-variables";
+
+.keybinding-cheatsheet {
+  overflow: auto;
+  padding: 10px;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-transition: all 0.2s ease-in;
+  h2 {
+    margin-top: 0px;
+  }
+  .keybinding-filter {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .keybinding {
+    padding-bottom: 3px;
+    .keybinding-keystrokes {
+      display: inline;
+      width: 40%;
+    }
+    .keybinding-command {
+      display: inline;
+      float: right;
+      margin-left: 10px;
+    }
+  }
+}
