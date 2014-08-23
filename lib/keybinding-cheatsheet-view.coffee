@@ -1,4 +1,4 @@
-{ScrollView, View} = require 'atom'
+{EditorView, ScrollView, View} = require 'atom'
 
 module.exports =
 class KeybindingCheatsheetView extends View
@@ -6,13 +6,23 @@ class KeybindingCheatsheetView extends View
     @div class: 'keybinding-cheatsheet tool-panel', 'data-show-on-right-side': atom.config.get('keybinding-cheatsheet.showOnRightSide'), =>
       @div class: 'keybinding-panel-header', =>
         @h2 'Keybinding Cheatsheet'
-        @input type: 'text', class: 'keybinding-filter', outlet: 'filterField'
+        @subview 'filterEditorView', new KeybindingFilterEditorView()
       @div class: 'keybinding-panel-content', =>
         @subview 'listView', new KeybindingListView()
 
   initialize: (serializeState) ->
     atom.workspaceView.command 'keybinding-cheatsheet:toggle', => @toggle()
     atom.workspaceView.command 'keybinding-cheatsheet:refresh', => @refresh()
+
+    @filterEditorView.setPlaceholderText('Filter keybindings')
+
+    @filterEditorView.getEditor().getBuffer().on 'contents-modified', =>
+      @update()
+
+    @subscribe atom.keymap, 'reloaded-key-bindings unloaded-key-bindings', =>
+      @update()
+
+    @update()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -44,6 +54,11 @@ class KeybindingCheatsheetView extends View
 
   shouldShowBinding: (binding) ->
     return false if binding.command == 'native!'
+    filterText = @filterEditorView.getText()
+    if filterText
+      {command, keystrokes, selector, source} = binding
+      if "#{command}#{keystrokes}#{selector}#{source}".indexOf(filterText) == -1
+        return false
     return true
 
   deactivate: ->
@@ -65,6 +80,18 @@ class KeybindingCheatsheetView extends View
       @removeClass('panel-right')
       @addClass('panel-left')
       atom.workspaceView.appendToLeft(this)
+
+
+class KeybindingFilterEditorView extends EditorView
+  constructor: (options={}) ->
+    options.mini = true
+    super(options)
+
+  setFontSize: (fontSize) ->
+    fontSize = parseInt(fontSize) or 0
+    fontSize = Math.min(32, fontSize)
+    fontSize = Math.max(10, fontSize)
+    super(fontSize)
 
 
 class KeybindingListView extends ScrollView
