@@ -105,7 +105,7 @@ class KeybindingListView extends ScrollView
 class KeybindingGroupView extends View
   @content: ->
     @div class: 'keybinding-group', =>
-      @h3 class: 'keybinding-group-header', outlet: 'header'
+      @h2 class: 'keybinding-group-header', outlet: 'header'
       @div class: 'keybinding-group-items', outlet: 'items'
 
   initialize: (name) ->
