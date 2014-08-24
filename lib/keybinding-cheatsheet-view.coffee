@@ -1,4 +1,6 @@
 {EditorView, ScrollView, View} = require 'atom'
+_ = require 'underscore-plus'
+
 
 module.exports =
 class KeybindingCheatsheetView extends View
@@ -20,8 +22,10 @@ class KeybindingCheatsheetView extends View
       @update()
 
     @subscribe atom.keymap, 'reloaded-key-bindings unloaded-key-bindings', =>
+      @loadKeyBindings()
       @update()
 
+    @loadKeyBindings()
     @update()
 
   # Returns an object that can be retrieved when package is activated
@@ -37,13 +41,16 @@ class KeybindingCheatsheetView extends View
     else
       @show()
 
+  loadKeyBindings: ->
+    @keyBindings = _.sortBy(atom.keymaps.keyBindings, 'keystrokes')
+
   refresh: ->
     return unless @isVisible()
     @update()
 
   update: ->
     @listView.empty()
-    for b in atom.keymaps.keyBindings
+    for b in @keyBindings
       continue unless @shouldShowBinding(b)
       [pkg, command] = b.command.split ':'
       group = @listView.find("[data-keybinding-group=#{pkg}]")?.view()
