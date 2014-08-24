@@ -1,4 +1,4 @@
-{EditorView, ScrollView, View} = require 'atom'
+{$, EditorView, ScrollView, View} = require 'atom'
 _ = require 'underscore-plus'
 
 
@@ -37,8 +37,13 @@ class KeybindingCheatsheetView extends View
 
   toggle: ->
     if @isVisible()
+      # Restore the focus to the last focused elment if any part of the
+      # cheatsheet currently has the focus.
+      if @find(':focus').length && @lastFocusedElement?.isOnDom()
+        @lastFocusedElement.focus()
       @detach()
     else
+      @lastFocusedElement = $(':focus')
       @show()
 
   loadKeyBindings: ->
@@ -72,10 +77,8 @@ class KeybindingCheatsheetView extends View
       @remove()
 
   show: ->
-    # TODO: make this more efficient
-    @update()
     @attach() unless @hasParent()
-    @focus()
+    @lastFocused = @filterEditorView.focus()
 
   attach: ->
     return unless atom.project.getPath()
