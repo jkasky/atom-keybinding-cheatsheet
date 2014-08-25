@@ -39,7 +39,7 @@ class KeybindingCheatsheetView extends View
     @detach()
 
   toggle: ->
-    if @isVisible()
+    if @hasParent()
       # Restore the focus to the last focused elment if any part of the
       # cheatsheet currently has the focus.
       if @find(':focus').length && @lastFocusedElement?.isOnDom()
