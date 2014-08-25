@@ -14,7 +14,6 @@ class KeybindingCheatsheetView extends View
 
   initialize: (serializeState) ->
     atom.workspaceView.command 'keybinding-cheatsheet:toggle', => @toggle()
-    atom.workspaceView.command 'keybinding-cheatsheet:refresh', => @refresh()
 
     @filterEditorView.setPlaceholderText('Filter keybindings')
 
@@ -48,10 +47,6 @@ class KeybindingCheatsheetView extends View
 
   loadKeyBindings: ->
     @keyBindings = _.sortBy(atom.keymaps.keyBindings, 'keystrokes')
-
-  refresh: ->
-    return unless @isVisible()
-    @update()
 
   update: ->
     @listView.empty()

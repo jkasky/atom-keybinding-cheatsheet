@@ -10,7 +10,6 @@
       'label': 'Keybinding Cheatsheet'
       'submenu': [
         { 'label': 'Toggle', 'command': 'keybinding-cheatsheet:toggle' }
-        { 'label': 'Refresh', 'command': 'keybinding-cheatsheet:refresh' }
       ]
     ]
   }
