@@ -133,3 +133,4 @@ class KeybindingView extends View
     @keystrokes.text(@binding.keystrokes)
     [pkg, command] = binding.command.split ':'
     @command.text(command)
+    @attr('title', 'Selector ' + binding.selector)
