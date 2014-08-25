@@ -51,7 +51,7 @@ class KeybindingCheatsheetView extends View
 
   loadKeyBindings: ->
     sortKey = atom.config.get('keybinding-cheatsheet.sortKeybindingsBy')
-    @keyBindings = _.sortBy(atom.keymaps.keyBindings, sortKey)
+    @keyBindings = _.sortBy(atom.keymap.keyBindings, sortKey)
 
   update: ->
     @listView.empty()
