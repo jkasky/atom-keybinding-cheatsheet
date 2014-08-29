@@ -1,8 +1,8 @@
 {
   "name": "keybinding-cheatsheet",
   "main": "./lib/keybinding-cheatsheet",
-  "version": "0.0.0",
-  "description": "A short description of your package",
+  "version": "0.0.1",
+  "description": "Quickly view and filter atom keybindings.",
   "activationEvents": ["keybinding-cheatsheet:toggle"],
   "repository": "https://github.com/atom/atom-keybinding-cheatsheet",
   "license": "MIT",
