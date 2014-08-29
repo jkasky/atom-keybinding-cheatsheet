@@ -15,6 +15,8 @@ class KeybindingCheatsheetView extends View
   initialize: (serializeState) ->
     atom.workspaceView.command 'keybinding-cheatsheet:toggle', => @toggle()
 
+    @otherPlatformSelector = new RegExp("\\.platform-(?!#{process.platform})")
+
     @filterEditorView.setPlaceholderText('Filter keybindings')
 
     @filterEditorView.getEditor().getBuffer().on 'contents-modified', =>
@@ -50,8 +52,17 @@ class KeybindingCheatsheetView extends View
       @show()
 
   loadKeyBindings: ->
+    self = this
     sortKey = atom.config.get('keybinding-cheatsheet.sortKeybindingsBy')
-    @keyBindings = _.sortBy(atom.keymap.keyBindings, sortKey)
+    @keyBindings = _.reject(
+      _.sortBy(atom.keymap.getKeyBindings(), sortKey),
+      (binding) =>
+        if binding.command == 'native!'
+          return true
+        if @otherPlatformSelector.test(binding.selector)
+          return true
+        return false
+    )
 
   update: ->
     @listView.empty()
@@ -65,7 +76,6 @@ class KeybindingCheatsheetView extends View
       group.items.append(new KeybindingView(b))
 
   shouldShowBinding: (binding) ->
-    return false if binding.command == 'native!'
     filterText = @filterEditorView.getText()
     if filterText
       {command, keystrokes, selector, source} = binding
