@@ -1,4 +1,4 @@
-# keybinding-cheatsheet package for Atom
+# keybinding-cheatsheet package for Atom [![Build Status](https://travis-ci.org/jkasky/atom-keybinding-cheatsheet.svg)](https://travis-ci.org/jkasky/atom-keybinding-cheatsheet)
 
 Quickly view and filter Atom keybindings.
 
