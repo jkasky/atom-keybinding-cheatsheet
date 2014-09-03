@@ -15,6 +15,7 @@ class KeybindingCheatsheetView extends View
   initialize: (serializeState) ->
     atom.workspaceView.command 'keybinding-cheatsheet:toggle', => @toggle()
 
+    @platformSelector = new RegExp("\\.platform-#{process.platform}")
     @otherPlatformSelector = new RegExp("\\.platform-(?!#{process.platform})")
 
     @filterEditorView.setPlaceholderText('Filter keybindings')
@@ -59,7 +60,8 @@ class KeybindingCheatsheetView extends View
       (binding) =>
         if binding.command == 'native!'
           return true
-        if @otherPlatformSelector.test(binding.selector)
+        if !@platformSelector.test(binding.selector) &&
+            @otherPlatformSelector.test(binding.selector)
           return true
         return false
     )

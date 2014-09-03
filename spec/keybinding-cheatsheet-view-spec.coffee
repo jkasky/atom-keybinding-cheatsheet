@@ -44,15 +44,21 @@ describe "KeybindingCheatsheetView", ->
     }
     {
       source: bindingSource
-      keystrokes: 'cntrl-w'
+      keystrokes: 'ctrl-w'
       command: 'core-cancel'
       selector: '.platform-win32 .go-to-line .mini-editor .input'
     }
     {
       source: bindingSource
-      keystrokes: 'cntrl-w'
+      keystrokes: 'ctrl-w'
       command: 'core-cancel'
       selector: '.platform-linux .go-to-line .mini-editor .input'
+    }
+    {
+      source: bindingSource
+      keystrokes: 'ctrl-g'
+      command: 'go-to-line:toggle'
+      selector: '.platform-darwin, .platform-win32, .platform-linux'
     }
   ]
 
@@ -87,10 +93,10 @@ describe "KeybindingCheatsheetView", ->
       expect(view.keyBindings.length).not.toEqual 0
 
     it 'should exclude other platform bindings', ->
-      expect(view.find('.keybinding').length).toEqual(5)
+      expect(view.find('.keybinding').length).toEqual(6)
       for b in view.keyBindings
-        expect(b.selector.indexOf '.platform-linux').toEqual -1
-        expect(b.selector.indexOf '.platform-win32').toEqual -1
+        if b.selector.indexOf('.platform') >= 0
+          expect(b.selector.indexOf(".platform-#{process.platform}") >= 0).toBeTruthy()
 
     it 'should exclude native bindings', ->
       for b in view.keyBindings
