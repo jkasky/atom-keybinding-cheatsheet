@@ -1,4 +1,4 @@
-{$, EditorView, ScrollView, View} = require 'atom'
+{$, View, ScrollView, TextEditorView} = require 'atom'
 _ = require 'underscore-plus'
 
 
@@ -8,7 +8,7 @@ class KeybindingCheatsheetView extends View
     @div class: 'keybinding-cheatsheet tool-panel', 'data-show-on-right-side': atom.config.get('keybinding-cheatsheet.showOnRightSide'), =>
       @div class: 'keybinding-panel-header', =>
         @h2 'Keybinding Cheatsheet'
-        @subview 'filterEditorView', new KeybindingFilterEditorView()
+        @subview 'filterEditorView', new KeybindingFilterEditorView(mini: true)
       @div class: 'keybinding-panel-content', =>
         @subview 'listView', new KeybindingListView()
 
@@ -18,9 +18,9 @@ class KeybindingCheatsheetView extends View
     @platformSelector = new RegExp("\\.platform-#{process.platform}")
     @otherPlatformSelector = new RegExp("\\.platform-(?!#{process.platform})")
 
-    @filterEditorView.setPlaceholderText('Filter keybindings')
+    @filterEditorView.getModel().setPlaceholderText('Filter keybindings')
 
-    @filterEditorView.getEditor().getBuffer().on 'contents-modified', =>
+    @filterEditorView.getModel().getBuffer().on 'contents-modified', =>
       @update()
 
     @subscribe atom.keymap, 'reloaded-key-bindings unloaded-key-bindings', =>
@@ -104,10 +104,7 @@ class KeybindingCheatsheetView extends View
       atom.workspaceView.appendToLeft(this)
 
 
-class KeybindingFilterEditorView extends EditorView
-  constructor: (options={}) ->
-    options.mini = true
-    super(options)
+class KeybindingFilterEditorView extends TextEditorView
 
   setFontSize: (fontSize) ->
     fontSize = parseInt(fontSize) or 0
