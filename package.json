@@ -1,7 +1,7 @@
 {
   "name": "keybinding-cheatsheet",
   "main": "./lib/keybinding-cheatsheet",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Quickly view and filter atom keybindings.",
   "activationEvents": [
     "keybinding-cheatsheet:toggle"
