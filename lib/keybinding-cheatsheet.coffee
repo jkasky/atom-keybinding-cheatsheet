@@ -2,9 +2,13 @@ KeybindingCheatsheetView = require './keybinding-cheatsheet-view'
 
 module.exports =
   keybindingCheatsheetView: null
-  configDefaults:
-    showOnRightSide: true
-    sortKeybindingsBy: 'keystrokes'
+  config:
+    showOnRightSide:
+      type: 'boolean'
+      default: true
+    sortKeybindingsBy:
+      type: 'string'
+      default: 'keystrokes'
 
   activate: (state) ->
     @keybindingCheatsheetView = new KeybindingCheatsheetView(state.keybindingCheatsheetViewState)

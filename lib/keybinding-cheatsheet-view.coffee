@@ -1,4 +1,4 @@
-{$, View, ScrollView, TextEditorView} = require 'atom'
+{$, View, ScrollView, TextEditorView} = require 'atom-space-pen-views'
 _ = require 'underscore-plus'
 
 
@@ -13,21 +13,26 @@ class KeybindingCheatsheetView extends View
         @subview 'listView', new KeybindingListView()
 
   initialize: (serializeState) ->
-    atom.workspaceView.command 'keybinding-cheatsheet:toggle', => @toggle()
+    atom.commands.add 'atom-workspace', 'keybinding-cheatsheet:toggle', =>
+      @toggle()
 
     @platformSelector = new RegExp("\\.platform-#{process.platform}")
     @otherPlatformSelector = new RegExp("\\.platform-(?!#{process.platform})")
 
     @filterEditorView.getModel().setPlaceholderText('Filter keybindings')
 
-    @filterEditorView.getModel().getBuffer().on 'contents-modified', =>
+    @filterEditorView.getModel().getBuffer().onDidStopChanging =>
       @update()
 
-    @subscribe atom.keymap, 'reloaded-key-bindings unloaded-key-bindings', =>
+    atom.keymap.onDidReloadKeymap =>
       @loadKeyBindings()
       @update()
 
-    @subscribe atom.config.observe 'keybinding-cheatsheet.sortKeybindingsBy', =>
+    atom.keymap.onDidUnloadKeymap =>
+      @loadKeyBindings()
+      @update()
+
+    atom.config.observe 'keybinding-cheatsheet.sortKeybindingsBy', =>
       @loadKeyBindings()
       @update()
 
@@ -93,15 +98,16 @@ class KeybindingCheatsheetView extends View
     @lastFocused = @filterEditorView.focus()
 
   attach: ->
-    return unless atom.project.getPath()
+    return unless atom.project.getPaths()
+    workspaceView = atom.views.getView(atom.workspace)
     if atom.config.get('keybinding-cheatsheet.showOnRightSide')
       @removeClass('panel-left')
       @addClass('panel-right')
-      atom.workspaceView.appendToRight(this)
+      atom.workspace.addRightPanel(item: this)
     else
       @removeClass('panel-right')
       @addClass('panel-left')
-      atom.workspaceView.appendToLeft(this)
+      atom.workspace.addLeftPanel(item: this)
 
 
 class KeybindingFilterEditorView extends TextEditorView

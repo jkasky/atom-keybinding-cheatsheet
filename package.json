@@ -3,15 +3,13 @@
   "main": "./lib/keybinding-cheatsheet",
   "version": "0.0.5",
   "description": "Quickly view and filter atom keybindings.",
-  "activationEvents": [
-    "keybinding-cheatsheet:toggle"
-  ],
   "repository": "https://github.com/jkasky/atom-keybinding-cheatsheet",
   "license": "MIT",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">=0.174.0, <2.0.0"
   },
   "dependencies": {
+    "atom-space-pen-views": "^2.0.3",
     "underscore-plus": "1.5.1"
   }
 }

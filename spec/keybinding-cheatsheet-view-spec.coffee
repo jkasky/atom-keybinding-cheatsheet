@@ -1,5 +1,4 @@
 path = require 'path'
-{WorkspaceView} = require 'atom'
 KeybindingCheatsheetView = require '../lib/keybinding-cheatsheet-view'
 _ = require 'underscore-plus'
 
@@ -74,7 +73,6 @@ describe "KeybindingCheatsheetView", ->
   view = null
 
   beforeEach ->
-    atom.workspaceView = new WorkspaceView()
     expect(atom.keymap).toBeDefined()
 
   describe 'when loading keybindings', ->
