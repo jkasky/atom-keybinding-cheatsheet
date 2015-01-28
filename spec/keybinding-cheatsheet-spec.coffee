@@ -12,10 +12,8 @@ describe "KeybindingCheatsheet", ->
   describe "when the keybinding-cheatsheet:toggle event is triggered", ->
     it "attaches/detaches", ->
 
-      promise = atom.packages.activatePackage('keybinding-cheatsheet')
-
       waitsForPromise ->
-        promise
+        atom.packages.activatePackage('keybinding-cheatsheet')
 
       runs ->
         expect($(workspaceView).find('.keybinding-cheatsheet')).not.toExist()

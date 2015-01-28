@@ -1,7 +1,9 @@
+{CompositeDisposable} = require 'atom'
 KeybindingCheatsheetView = require './keybinding-cheatsheet-view'
 
+
 module.exports =
-  keybindingCheatsheetView: null
+
   config:
     showOnRightSide:
       type: 'boolean'
@@ -10,11 +12,27 @@ module.exports =
       type: 'string'
       default: 'keystrokes'
 
-  activate: (state) ->
-    @keybindingCheatsheetView = new KeybindingCheatsheetView(state.keybindingCheatsheetViewState)
+  view: null
+
+  activate: (@state) ->
+    @disposables = new CompositeDisposable
+
+    @disposables.add atom.commands.add('atom-workspace', {
+      'keybinding-cheatsheet:toggle': => @getView().toggle()
+    })
 
   deactivate: ->
-    @keybindingCheatsheetView.destroy()
+    @disposables.dispose()
+    @view?.deactivate()
+    @view = null
+
+  getView: ->
+    unless @view?
+      @view = new KeybindingCheatsheetView(@state)
+    @view
 
   serialize: ->
-    keybindingCheatsheetViewState: @keybindingCheatsheetView.serialize()
+    if @view?
+      @view.serialize()
+    else
+      @state

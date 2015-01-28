@@ -12,10 +12,7 @@ class KeybindingCheatsheetView extends View
       @div class: 'keybinding-panel-content', =>
         @subview 'listView', new KeybindingListView()
 
-  initialize: (serializeState) ->
-    atom.commands.add 'atom-workspace', 'keybinding-cheatsheet:toggle', =>
-      @toggle()
-
+  initialize: (state) ->
     @platformSelector = new RegExp("\\.platform-#{process.platform}")
     @otherPlatformSelector = new RegExp("\\.platform-(?!#{process.platform})")
 
@@ -47,7 +44,7 @@ class KeybindingCheatsheetView extends View
     @detach()
 
   toggle: ->
-    if @hasParent()
+    if @isVisible()
       # Restore the focus to the last focused elment if any part of the
       # cheatsheet currently has the focus.
       if @find(':focus').length && @lastFocusedElement?.isOnDom()
