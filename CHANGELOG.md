@@ -1,3 +1,10 @@
-## 0.1.0 - First Release
-* Every feature added
-* Every bug fixed
+## 0.0.6
+* Fix issue #4, toggle keymap not working.
+* Fix all deprecation warnings.
+
+## 0.0.5
+* Fix a deprecation warning in deprecation cop.
+
+## 0.0.4
+* Fix issue #3, filter editor using deprecated class.
+* Add support for cross platform bindings.
