@@ -1,3 +1,6 @@
+## 0.0.7
+* Fix atom engine semver (izuzak)
+
 ## 0.0.6
 * Fix issue #4, toggle keymap not working.
 * Fix all deprecation warnings.
