@@ -73,7 +73,7 @@ class KeybindingCheatsheetView extends View
     for b in @keyBindings
       continue unless @shouldShowBinding(b)
       [pkg, command] = b.command.split ':'
-      group = @listView.find("[data-keybinding-group=#{pkg}]")?.view()
+      group = @listView.find("[data-keybinding-group='#{pkg}']")?.view()
       if !group
         group = new KeybindingGroupView(pkg)
         @listView.append(group)

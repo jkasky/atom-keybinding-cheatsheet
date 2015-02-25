@@ -1,3 +1,6 @@
+## 0.0.8
+* Fix issue #6 - Error: unrecognized expression: [data-keybinding-group=unset!]
+
 ## 0.0.7
 * Fix atom engine semver (izuzak)
 
