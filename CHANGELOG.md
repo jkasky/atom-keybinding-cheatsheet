@@ -1,3 +1,6 @@
+## 0.0.9
+* Hide cheatsheet on 'escape' when it is focused.
+
 ## 0.0.8
 * Fix issue #6 - Error: unrecognized expression: [data-keybinding-group=unset!]
 

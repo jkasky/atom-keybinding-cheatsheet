@@ -9,3 +9,6 @@
 # https://atom.io/docs/latest/advanced/keymaps
 'atom-workspace':
   'ctrl-alt-/': 'keybinding-cheatsheet:toggle'
+
+'.keybinding-cheatsheet atom-text-editor':
+  'escape': 'keybinding-cheatsheet:toggle'
