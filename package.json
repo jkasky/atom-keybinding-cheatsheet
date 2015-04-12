@@ -1,7 +1,7 @@
 {
   "name": "keybinding-cheatsheet",
   "main": "./lib/keybinding-cheatsheet",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Quickly view and filter atom keybindings.",
   "repository": "https://github.com/jkasky/atom-keybinding-cheatsheet",
   "license": "MIT",
