@@ -73,7 +73,7 @@ describe "KeybindingCheatsheetView", ->
   view = null
 
   beforeEach ->
-    expect(atom.keymap).toBeDefined()
+    expect(atom.keymaps).toBeDefined()
 
   describe 'when loading keybindings', ->
 
@@ -82,7 +82,7 @@ describe "KeybindingCheatsheetView", ->
       keyBindings.push coreKeyBindingsWithPlatforms...
       keyBindings.push editorKeyBindings...
       keyBindings.push nativeKeyBindings...
-      spyOn(atom.keymap, 'getKeyBindings').andReturn keyBindings
+      spyOn(atom.keymaps, 'getKeyBindings').andReturn keyBindings
       spyOn(atom.config, 'get').andReturn 'keystrokes'
       view = new KeybindingCheatsheetView
 
