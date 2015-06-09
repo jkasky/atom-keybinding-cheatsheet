@@ -87,7 +87,7 @@ describe "KeybindingCheatsheetView", ->
       view = new KeybindingCheatsheetView
 
     it "loads keybindings", ->
-      expect(atom.keymap.getKeyBindings).toHaveBeenCalled()
+      expect(atom.keymaps.getKeyBindings).toHaveBeenCalled()
       expect(view.keyBindings.length).not.toEqual 0
 
     it 'should exclude other platform bindings', ->

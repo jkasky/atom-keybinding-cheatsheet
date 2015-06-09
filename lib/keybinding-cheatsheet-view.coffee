@@ -21,11 +21,11 @@ class KeybindingCheatsheetView extends View
     @filterEditorView.getModel().getBuffer().onDidStopChanging =>
       @update()
 
-    atom.keymap.onDidReloadKeymap =>
+    atom.keymaps.onDidReloadKeymap =>
       @loadKeyBindings()
       @update()
 
-    atom.keymap.onDidUnloadKeymap =>
+    atom.keymaps.onDidUnloadKeymap =>
       @loadKeyBindings()
       @update()
 
@@ -58,7 +58,7 @@ class KeybindingCheatsheetView extends View
     self = this
     sortKey = atom.config.get('keybinding-cheatsheet.sortKeybindingsBy')
     @keyBindings = _.reject(
-      _.sortBy(atom.keymap.getKeyBindings(), sortKey),
+      _.sortBy(atom.keymaps.getKeyBindings(), sortKey),
       (binding) =>
         if binding.command == 'native!'
           return true
