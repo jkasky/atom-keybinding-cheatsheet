@@ -7,7 +7,7 @@ class KeybindingCheatsheetView extends View
   @content: ->
     @div class: 'keybinding-cheatsheet tool-panel', 'data-show-on-right-side': atom.config.get('keybinding-cheatsheet.showOnRightSide'), =>
       @div class: 'keybinding-panel-header', =>
-        @h2 'Keybinding Cheatsheet'
+        @h2 'Keybindings'
         @subview 'filterEditorView', new KeybindingFilterEditorView(mini: true)
       @div class: 'keybinding-panel-content', =>
         @subview 'listView', new KeybindingListView()

@@ -1,20 +1,22 @@
 @import "ui-variables";
 
 .keybinding-cheatsheet {
+  color: @text-color;
   height: 100%;
-  min-width: 315px;
+  min-width: @font-size * 30;
   overflow: none;
-  padding: 10px;
-  padding-right: 15px;
+  padding: @font-size;
+  padding-right: @font-size * 1.5;
 
   .keybinding-panel-header {
     position: absolute;
     top: 10px;
     left: 10px;
     right: 10px;
-    height: 65px;
+    height: @component-line-height * 2;
 
     h2 {
+      color: @text-color-highlight;
       margin-top: 0px;
     }
 
@@ -26,10 +28,17 @@
 
   .keybinding-panel-content {
     position: absolute;
-    top: 75px;
+    top: (@component-line-height * 3) + 10px;
     left: 10px;
     right: 10px;
     bottom: 5px;
+
+    .keybinding-group-header {
+      color: @text-color-highlight;
+      &:first-child {
+        margin-top: 0px;
+      }
+    }
 
     .keybinding-list {
       height: 100%;
