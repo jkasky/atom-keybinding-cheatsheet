@@ -54,6 +54,12 @@ class KeybindingCheatsheetView extends View
       @lastFocusedElement = $(':focus')
       @show()
 
+  down: ->
+    @listView.element.scrollTop += 20
+
+  up: ->
+    @listView.element.scrollTop -= 20
+
   loadKeyBindings: ->
     self = this
     sortKey = atom.config.get('keybinding-cheatsheet.sortKeybindingsBy')

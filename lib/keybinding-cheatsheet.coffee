@@ -19,6 +19,8 @@ module.exports =
 
     @disposables.add atom.commands.add('atom-workspace', {
       'keybinding-cheatsheet:toggle': => @getView().toggle()
+      'keybinding-cheatsheet:scroll-down': => @getView().down()
+      'keybinding-cheatsheet:scroll-up': => @getView().up()
     })
 
   deactivate: ->
