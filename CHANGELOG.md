@@ -1,3 +1,8 @@
+## 0.0.10
+* Fix issue #7 - Uncaught TypeError.
+* Clean up stlyes to look better with more themes.
+* Learn how to scroll up/down with arrow keys.
+
 ## 0.0.9
 * Hide cheatsheet on 'escape' when it is focused.
 
