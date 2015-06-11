@@ -36,6 +36,16 @@ class KeybindingCheatsheetView extends View
     @loadKeyBindings()
     @update()
 
+  attached: ->
+    @commandsSubscription = atom.commands.add @element,
+      'core:move-down': @down
+      'core:move-up': @up
+      'core:cancel': @toggle
+
+  detached: ->
+    @commandsSubscription?.dispose()
+    @commandsSubscription = null
+
   # Returns an object that can be retrieved when package is activated
   serialize: ->
 
@@ -43,7 +53,7 @@ class KeybindingCheatsheetView extends View
   destroy: ->
     @detach()
 
-  toggle: ->
+  toggle: =>
     if @isVisible()
       # Restore the focus to the last focused elment if any part of the
       # cheatsheet currently has the focus.
@@ -54,10 +64,10 @@ class KeybindingCheatsheetView extends View
       @lastFocusedElement = $(':focus')
       @show()
 
-  down: ->
+  down: =>
     @listView.element.scrollTop += 20
 
-  up: ->
+  up: =>
     @listView.element.scrollTop -= 20
 
   loadKeyBindings: ->
