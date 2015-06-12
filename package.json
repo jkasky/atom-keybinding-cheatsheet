@@ -1,7 +1,7 @@
 {
   "name": "keybinding-cheatsheet",
   "main": "./lib/keybinding-cheatsheet",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Quickly view and filter atom keybindings.",
   "repository": "https://github.com/jkasky/atom-keybinding-cheatsheet",
   "license": "MIT",
@@ -9,7 +9,9 @@
     "atom": ">=0.174.0 <2.0.0"
   },
   "activationCommands": {
-    "atom-workspace": ["keybinding-cheatsheet:toggle"]
+    "atom-workspace": [
+      "keybinding-cheatsheet:toggle"
+    ]
   },
   "dependencies": {
     "atom-space-pen-views": "^2.0.3",
