@@ -11,6 +11,4 @@
   'ctrl-alt-/': 'keybinding-cheatsheet:toggle'
 
 '.keybinding-cheatsheet atom-text-editor':
-  'escape': 'keybinding-cheatsheet:toggle'
-  'down': 'keybinding-cheatsheet:scroll-down'
-  'up': 'keybinding-cheatsheet:scroll-up'
+  'escape': 'core:cancel'
