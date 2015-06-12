@@ -1,3 +1,6 @@
+## 0.0.11
+* @aki77 speeds up start-up time
+
 ## 0.0.10
 * Fix issue #7 - Uncaught TypeError.
 * Clean up stlyes to look better with more themes.
@@ -10,7 +13,7 @@
 * Fix issue #6 - Error: unrecognized expression: [data-keybinding-group=unset!]
 
 ## 0.0.7
-* Fix atom engine semver (izuzak)
+* @izuzak fixes atom engine semver
 
 ## 0.0.6
 * Fix issue #4, toggle keymap not working.
