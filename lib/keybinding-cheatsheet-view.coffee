@@ -1,3 +1,4 @@
+{CompositeDisposable} = require 'atom'
 {$, View, ScrollView, TextEditorView} = require 'atom-space-pen-views'
 _ = require 'underscore-plus'
 
@@ -37,14 +38,18 @@ class KeybindingCheatsheetView extends View
     @update()
 
   attached: ->
-    @commandsSubscription = atom.commands.add @element,
+    @disposables = new CompositeDisposable
+
+    @disposables.add atom.commands.add @element,
+      'core-cancel': @toggle
       'core:move-down': @down
       'core:move-up': @up
+
+    @disposables.add atom.commands.add 'atom-workspace',
       'core:cancel': @toggle
 
   detached: ->
-    @commandsSubscription?.dispose()
-    @commandsSubscription = null
+    @disposables?.dispose()
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
