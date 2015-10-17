@@ -107,7 +107,7 @@ class KeybindingCheatsheetView extends View
       return true
     if pkg in atom.config.get('keybinding-cheatsheet.alwaysHideGroups')
       return false
-    if atom.config.get('keybinding-cheatsheet.hideAllOthers') && (pkg in atom.config.get('keybinding-cheatsheet.exceptFor'))
+    if atom.config.get('keybinding-cheatsheet.hideAllOthers') && !(pkg in atom.config.get('keybinding-cheatsheet.exceptFor'))
       return false
 
     return true
