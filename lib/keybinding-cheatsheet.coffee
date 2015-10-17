@@ -6,11 +6,30 @@ module.exports =
 
   config:
     showOnRightSide:
+      order: 1
       type: 'boolean'
       default: true
     sortKeybindingsBy:
+      order: 2
       type: 'string'
       default: 'keystrokes'
+
+    alwaysShowGroups:
+      order: 10
+      type: 'array'
+      default: []
+      items:
+        type: 'string'
+    hideAllOthers:
+      order: 11
+      type: 'boolean'
+      default: 'false'
+    exceptFor:
+      order: 12
+      type: 'array'
+      default: []
+      items:
+        type: 'string'
 
   view: null
 
