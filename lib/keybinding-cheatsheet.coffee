@@ -20,12 +20,18 @@ module.exports =
       default: []
       items:
         type: 'string'
-    hideAllOthers:
+    alwaysHideGroups:
       order: 11
+      type: 'array'
+      default: []
+      items:
+        type: 'string'
+    hideAllOthers:
+      order: 12
       type: 'boolean'
       default: 'false'
     exceptFor:
-      order: 12
+      order: 13
       type: 'array'
       default: []
       items:
