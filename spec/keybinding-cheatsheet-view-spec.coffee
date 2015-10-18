@@ -83,7 +83,7 @@ describe "KeybindingCheatsheetView", ->
       keyBindings.push editorKeyBindings...
       keyBindings.push nativeKeyBindings...
       spyOn(atom.keymaps, 'getKeyBindings').andReturn keyBindings
-      spyOn(atom.config, 'get').andReturn 'keystrokes'
+      atom.config.set 'keybinding-cheatsheet.sortKeybindingsBy', 'keystrokes'
       view = new KeybindingCheatsheetView
 
     it "loads keybindings", ->
