@@ -73,6 +73,11 @@ describe "KeybindingCheatsheetView", ->
   view = null
 
   beforeEach ->
+    atom.config.set 'keybinding-cheatsheet.sortKeybindingsBy', 'keystrokes'
+    atom.config.set 'keybinding-cheatsheet.alwaysShowGroups', []
+    atom.config.set 'keybinding-cheatsheet.alwaysHideGroups', []
+    atom.config.set 'keybinding-cheatsheet.hideAllOthers', false
+    atom.config.set 'keybinding-cheatsheet.alwaysHideGroups', []
     expect(atom.keymaps).toBeDefined()
 
   describe 'when loading keybindings', ->
@@ -83,7 +88,6 @@ describe "KeybindingCheatsheetView", ->
       keyBindings.push editorKeyBindings...
       keyBindings.push nativeKeyBindings...
       spyOn(atom.keymaps, 'getKeyBindings').andReturn keyBindings
-      atom.config.set 'keybinding-cheatsheet.sortKeybindingsBy', 'keystrokes'
       view = new KeybindingCheatsheetView
 
     it "loads keybindings", ->
