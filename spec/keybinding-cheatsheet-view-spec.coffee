@@ -32,7 +32,7 @@ describe "KeybindingCheatsheetView", ->
     {
       source: bindingSource
       keystrokes: 'cmd-w'
-      command: 'core-cancel'
+      command: 'core:cancel'
       selector: '.platform-darwin .go-to-line .mini-editor .input'
     }
     {
@@ -44,13 +44,13 @@ describe "KeybindingCheatsheetView", ->
     {
       source: bindingSource
       keystrokes: 'ctrl-w'
-      command: 'core-cancel'
+      command: 'core:cancel'
       selector: '.platform-win32 .go-to-line .mini-editor .input'
     }
     {
       source: bindingSource
       keystrokes: 'ctrl-w'
-      command: 'core-cancel'
+      command: 'core:cancel'
       selector: '.platform-linux .go-to-line .mini-editor .input'
     }
     {
@@ -106,3 +106,45 @@ describe "KeybindingCheatsheetView", ->
 
     it "sorts keybindings by keystrokes", ->
       expect(view.keyBindings[0].keystrokes).toEqual 'alt-d'
+
+  describe 'always showing groups', ->
+
+    beforeEach ->
+      keyBindings = []
+      keyBindings.push editorKeyBindings...
+      keyBindings.push coreKeyBindingsWithPlatforms...
+      atom.config.set 'keybinding-cheatsheet.alwaysShowGroups', ['editor']
+      spyOn(atom.keymaps, 'getKeyBindings').andReturn keyBindings
+      view = new KeybindingCheatsheetView
+
+    it 'shows them by default', ->
+      count = 0
+      for b in view.keyBindings
+        if b.command.split(':')[0] == 'editor'
+          ++count
+      expect(count).toEqual(3)
+
+    it 'shows them when search does not match', ->
+      view.filterEditorView.setText('core')
+      view.update()
+      count = 0
+      for b in view.keyBindings
+        if b.command.split(':')[0] == 'editor'
+          ++count
+      expect(count).toEqual(3)
+
+  describe 'always hide groups', ->
+
+    beforeEach ->
+      keyBindings = []
+      keyBindings.push editorKeyBindings...
+      atom.config.set 'keybinding-cheatsheet.alwaysHideGroups', ['editor']
+      spyOn(atom.keymaps, 'getKeyBindings').andReturn keyBindings
+      view = new KeybindingCheatsheetView
+
+    it 'does not show them by default', ->
+      expect(view.find('.keybinding').length).toEqual(0)
+
+    it 'does not show them when search matches', ->
+      view.filterEditorView.setText('editor')
+      expect(view.find('.keybinding').length).toEqual(0)
