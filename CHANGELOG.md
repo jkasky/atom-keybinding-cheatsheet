@@ -1,3 +1,6 @@
+## 0.1.0
+* @hasCharles add always hide/show settings.
+
 ## 0.0.11
 * @aki77 speeds up start-up time
 
