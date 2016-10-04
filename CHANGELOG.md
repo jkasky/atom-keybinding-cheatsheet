@@ -1,3 +1,7 @@
+## 0.1.1
+* Fix issue #16 - does not work well with Material UI theme.
+* Fix issue #17 - Atom v1.12 incompatibilities.
+
 ## 0.1.0
 * @hasCharles add always hide/show settings.
 
