@@ -174,6 +174,6 @@ class KeybindingView extends View
 
   initialize: (@binding) ->
     @keystrokes.text(@binding.keystrokes)
-    [pkg, command] = binding.command.split ':'
+    [pkg, command] = @binding.command.split ':'
     @command.text(command)
-    @attr('title', 'Selector ' + binding.selector)
+    @attr('title', 'Selector ' + @binding.selector)
